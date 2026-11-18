@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Laporan pengujian usability website sekolah">
+<title>Studi Kasus | Pengujian Usability Website Sekolah</title>
+
+<style>
+:root {
+    --bg-main: #080c17;
+    --bg-section: #0d1428;
+    --bg-card: #111d39;
+    --bg-card-light: #19264a;
+
+    --blue: #2878f0;
+    --blue-light: #55c8ff;
+    --purple: #7959e8;
+    --lavender: #a78bfa;
+
+    --white: #f0f3ff;
+    --muted: #aab6d2;
+
+    --gradient: linear-gradient(135deg, #2878f0, #7959e8);
+    --gradient-light: linear-gradient(135deg, #55c8ff, #a78bfa);
+
+    --line: rgba(167, 139, 250, .18);
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 80% 15%, rgba(121, 89, 232, .20), transparent 32%),
+        radial-gradient(circle at 10% 80%, rgba(40, 120, 240, .12), transparent 30%),
+        linear-gradient(135deg, #080c17, #0d1428 55%, #11152c);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(8, 12, 23, .92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    max-width: 1120px;
+    margin: auto;
+    padding: 17px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand span {
+    background: var(--gradient-light);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    font-size: 14px;
+    color: var(--muted);
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--blue-light);
+}
+
+main {
+    max-width: 1120px;
+    margin: auto;
+    padding: 0 24px;
+}
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px 0 80px;
+    position: relative;
+}
+
+.eyebrow {
+    color: var(--blue-light);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 82px);
+    line-height: 1.04;
+    letter-spacing: -3px;
+    max-width: 850px;
+    margin: 20px 0;
+}
+
+h1 span,
+h2 span {
+    background: var(--gradient-light);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.lead {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 720px;
+}
+
+.pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.pill,
+.tag {
+    border: 1px solid var(--line);
+    background: rgba(25, 38, 74, .65);
+    padding: 12px 16px;
+    border-radius: 14px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.pill strong {
+    display: block;
+    color: var(--white);
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+section.content {
+    padding: 75px 0;
+    border-top: 1px solid var(--line);
+}
+
+.kicker {
+    color: var(--blue-light);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.15;
+    margin: 12px 0 18px;
+    letter-spacing: -1px;
+}
+
+.intro {
+    max-width: 760px;
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.card {
+    background: linear-gradient(
+        145deg,
+        rgba(25, 38, 74, .95),
+        rgba(17, 29, 57, .95)
+    );
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 23px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(85, 200, 255, .45);
+    box-shadow: 0 12px 30px rgba(40, 120, 240, .12);
+}
+
+.card h3 {
+    margin: 8px 0;
+    color: var(--white);
+}
+
+.card p {
+    color: var(--muted);
+    margin: 0;
+}
+
+.number {
+    font-size: 13px;
+    color: var(--blue-light);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.task {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 17px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: rgba(17, 29, 57, .75);
+    transition: .3s;
+}
+
+.task:hover {
+    border-color: rgba(121, 89, 232, .6);
+    background: var(--bg-card-light);
+}
+
+.task b {
+    color: var(--blue-light);
+    min-width: 34px;
+}
+
+.note {
+    margin-top: 22px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--purple);
+    background: rgba(121, 89, 232, .10);
+    border-radius: 0 12px 12px 0;
+    color: var(--muted);
+}
+
+.table-wrap {
+    overflow-x: auto;
+    margin-top: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px;
+    background: rgba(17, 29, 57, .85);
+}
+
+th,
+td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid var(--line);
+}
+
+th {
+    color: var(--blue-light);
+    font-size: 13px;
+    background: rgba(40, 120, 240, .10);
+}
+
+td {
+    color: var(--muted);
+}
+
+tr:last-child td {
+    border-bottom: 0;
+}
+
+.placeholder {
+    color: var(--white);
+    background: rgba(121, 89, 232, .12);
+    border: 1px dashed rgba(167, 139, 250, .5);
+    padding: 14px;
+    border-radius: 12px;
+}
+
+.cta {
+    margin: 55px 0 80px;
+    padding: 35px;
+    border-radius: 24px;
+    background: linear-gradient(120deg, #2878f0, #7959e8);
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(40, 120, 240, .15);
+}
+
+.cta p {
+    color: #f0f3ff;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 12px;
+    background: var(--white);
+    color: #19264a;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 800;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: var(--blue-light);
+    color: #080c17;
+    transform: translateY(-2px);
+}
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media(max-width:760px) {
+    .nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    .hero {
+        min-height: 560px;
+        padding: 65px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .task-list {
+        grid-template-columns: 1fr;
+    }
+
+    section.content {
+        padding: 55px 0;
+    }
+
+    h1 {
+        letter-spacing: -1.5px;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="#home"><span>STUDI</span> KASUS.</a>
+    <nav>
+      <a href="#tentang">Tentang</a>
+      <a href="#metode">Metode</a>
+      <a href="#skenario">Skenario</a>
+      <a href="#hasil">Hasil</a>
+      <a href="#rekomendasi">Rekomendasi</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="eyebrow">Studi Kasus • Pengujian Usabilitas</div>
+    <h1>Menguji Kemudahan <span>Website Sekolah</span></h1>
+    <p class="lead">Laporan pengujian untuk mengetahui seberapa mudah pengguna menemukan informasi dan menggunakan fitur yang tersedia pada website sekolah.</p>
+
+    <div class="pills">
+      <div class="pill">Objek pengujian<strong>Website sekolah</strong></div>
+      <div class="pill">Fokus<strong>Temuan &amp; perbaikan</strong></div>
+      <div class="pill">Responden<strong>5 orang</strong></div>
+      <div class="pill">Skenario<strong>10 skenario</strong></div>
+    </div>
+  </section>
+
+  <section class="content" id="tentang">
+    <div class="kicker">01 — LATAR BELAKANG</div>
+    <h2>Tentang <span>Pengujian</span></h2>
+    <p class="intro">Pengujian usability dilakukan untuk mengevaluasi kemudahan website sekolah saat digunakan. Pengujian berfokus pada kemampuan pengguna memahami navigasi, menemukan informasi, dan menyelesaikan tugas yang diberikan.</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="number">TUJUAN 01</div>
+        <h3>Menilai kemudahan</h3>
+        <p>Mengetahui apakah menu dan fitur website mudah dipahami oleh pengguna.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">TUJUAN 02</div>
+        <h3>Menemukan kendala</h3>
+        <p>Mencatat bagian website yang membingungkan atau membutuhkan perbaikan.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">TUJUAN 03</div>
+        <h3>Menyusun rekomendasi</h3>
+        <p>Memberikan saran berdasarkan hasil pengamatan selama pengujian.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="content" id="metode">
+    <div class="kicker">02 — METODE PENGUJIAN</div>
+    <h2>Bagaimana Pengujian <span>Dilakukan?</span></h2>
+    <p class="intro">Pengujian menggunakan 10 skenario tugas yang dicoba oleh 5 responden. Amati apakah responden dapat menyelesaikan setiap tugas, berapa lama prosesnya, dan kendala apa yang mereka alami.</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="number">01</div>
+        <h3>Responden</h3>
+        <p>5 orang pengguna yang diminta mencoba website sekolah.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">02</div>
+        <h3>Skenario tugas</h3>
+        <p>10 tugas untuk menguji alur navigasi dan pencarian informasi.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">03</div>
+        <h3>Pengamatan</h3>
+        <p>Catat keberhasilan, kesulitan, komentar, dan saran dari responden.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="content" id="skenario">
+    <div class="kicker">03 — DAFTAR TUGAS</div>
+    <h2>Skenario <span>Pengujian</span></h2>
+    <p class="intro">Sesuaikan nama tugas berikut dengan skenario yang benar-benar digunakan saat pengujian.</p>
+
+    <div class="task-list">
+      <div class="task"><b>01</b><div><strong>Membuka halaman utama</strong><p class="intro">Periksa apakah pengguna dapat menemukan halaman beranda.</p></div></div>
+      <div class="task"><b>02</b><div><strong>Menemukan profil sekolah</strong><p class="intro">Periksa kemudahan menemukan informasi profil sekolah.</p></div></div>
+      <div class="task"><b>03</b><div><strong>Menemukan visi dan misi</strong><p class="intro">Periksa apakah informasi visi dan misi mudah ditemukan.</p></div></div>
+      <div class="task"><b>04</b><div><strong>Membaca sejarah sekolah</strong><p class="intro">Periksa alur menuju halaman sejarah sekolah.</p></div></div>
+      <div class="task"><b>05</b><div><strong>Melihat informasi jurusan</strong><p class="intro">Periksa kemudahan menemukan daftar jurusan.</p></div></div>
+      <div class="task"><b>06</b><div><strong>Mencari informasi guru</strong><p class="intro">Periksa apakah informasi guru mudah diakses.</p></div></div>
+      <div class="task"><b>07</b><div><strong>Mencari informasi siswa</strong><p class="intro">Periksa navigasi menuju informasi siswa yang tersedia untuk publik.</p></div></div>
+      <div class="task"><b>08</b><div><strong>Menemukan berita atau kegiatan</strong><p class="intro">Periksa kemudahan menemukan informasi kegiatan sekolah.</p></div></div>
+      <div class="task"><b>09</b><div><strong>Menemukan fasilitas sekolah</strong><p class="intro">Periksa apakah informasi fasilitas mudah ditemukan.</p></div></div>
+      <div class="task"><b>10</b><div><strong>Menemukan kontak sekolah</strong><p class="intro">Periksa kemudahan menemukan alamat atau kontak sekolah.</p></div></div>
+    </div>
+
+    <div class="note">Catatan: daftar ini merupakan contoh awal berdasarkan bagian umum website sekolah. Ganti tugas yang tidak sesuai dengan 10 skenario asli milikmu.</div>
+  </section>
+
+  <section class="content" id="hasil">
+    <div class="kicker">04 — HASIL PENGUJIAN</div>
+    <h2>Ringkasan <span>Temuan</span></h2>
+    <p class="intro">Masukkan hasil pengamatan asli dari kelima responden. Bagian ini sengaja disediakan agar laporan tidak menggunakan angka atau temuan yang dibuat-buat.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspek</th>
+            <th>Hasil pengujian</th>
+            <th>Catatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Keberhasilan tugas</td><td>[Isi hasil]</td><td>[Berapa tugas berhasil diselesaikan]</td></tr>
+          <tr><td>Kemudahan navigasi</td><td>[Isi hasil]</td><td>[Temuan responden]</td></tr>
+          <tr><td>Kejelasan informasi</td><td>[Isi hasil]</td><td>[Bagian yang mudah/sulit dipahami]</td></tr>
+          <tr><td>Kendala pengguna</td><td>[Isi hasil]</td><td>[Masalah yang ditemukan]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="content" id="rekomendasi">
+    <div class="kicker">05 — EVALUASI</div>
+    <h2>Rekomendasi <span>Perbaikan</span></h2>
+    <p class="intro">Tuliskan rekomendasi berdasarkan kendala yang benar-benar ditemukan selama pengujian.</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="number">REKOMENDASI 01</div>
+        <h3>Navigasi</h3>
+        <p class="placeholder">[Isi saran perbaikan menu atau navigasi berdasarkan hasil pengujian.]</p>
+      </article>
+
+      <article class="card">
+        <div class="number">REKOMENDASI 02</div>
+        <h3>Tampilan</h3>
+        <p class="placeholder">[Isi saran perbaikan tampilan berdasarkan masukan responden.]</p>
+      </article>
+
+      <article class="card">
+        <div class="number">REKOMENDASI 03</div>
+        <h3>Informasi</h3>
+        <p class="placeholder">[Isi saran agar informasi sekolah lebih mudah ditemukan.]</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="kicker">06 — KESIMPULAN</div>
+    <h2>Kesimpulan <span>Pengujian</span></h2>
+    <p class="placeholder">[Tuliskan kesimpulan berdasarkan hasil pengujian 10 skenario kepada 5 responden. Jelaskan bagian yang sudah mudah digunakan, kendala utama, dan perbaikan yang perlu diprioritaskan.]</p>
+  </section>
+
+  <div class="cta">
+    <h2>Terima kasih telah <span>melihat laporan ini.</span></h2>
+    <p>Evaluasi dilakukan untuk membantu website sekolah menjadi lebih mudah dipahami dan digunakan.</p>
+    <a class="btn" href="#home">Kembali ke atas ↑</a>
+  </div>
+</main>
+
+<footer>© 2026 • Studi Kasus Pengujian Usability Website Sekolah</footer>
+</body>
+</html>
